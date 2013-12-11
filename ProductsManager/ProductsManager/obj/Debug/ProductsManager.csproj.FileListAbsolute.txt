@@ -1,0 +1,15 @@
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\bin\Debug\ProductsManager.exe.config
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\bin\Debug\ProductsManager.exe
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\bin\Debug\ProductsManager.pdb
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\ProductsManager.csprojResolveAssemblyReference.cache
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\MainWindow.baml
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\MainWindow.g.cs
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\App.g.cs
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\ProductsManager_MarkupCompile.cache
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\ProductsManager.g.resources
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\ProductsManager.Properties.Resources.resources
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\ProductsManager.csproj.GenerateResource.Cache
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\ProductsManager.exe
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\ProductsManager.pdb
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\ProductModify.baml
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\ProductModify.g.cs
