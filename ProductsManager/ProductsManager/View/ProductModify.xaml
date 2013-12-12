@@ -1,0 +1,25 @@
+﻿<Window x:Class="ProductsManager.ProductModify"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ProductModify" Height="300" Width="300">
+    <Grid>
+        <Label Content="Product id: 1111" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="_Name:" HorizontalAlignment="Left" Margin="70,41,0,0" VerticalAlignment="Top" Target="{Binding ElementName=TBName}"/>
+        <TextBox Name="TBName" HorizontalAlignment="Left" Height="23" Margin="119,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="_Price:" HorizontalAlignment="Left" Margin="76,72,0,0" VerticalAlignment="Top" Target="{Binding ElementName=TBPrice}"/>
+        <TextBox Name="TBPrice" HorizontalAlignment="Left" Height="23" Margin="119,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Is _available:" HorizontalAlignment="Left" Margin="44,103,0,0" VerticalAlignment="Top" Target="{Binding ElementName=CBAvailable}"/>
+        <ComboBox Name="CBAvailable" HorizontalAlignment="Left" Margin="119,103,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem IsSelected="True">true</ComboBoxItem>
+            <ComboBoxItem>false</ComboBoxItem>
+        </ComboBox>
+        <Label Content="Category:" HorizontalAlignment="Left" Margin="53,130,0,0" VerticalAlignment="Top" Target="{Binding ElementName=CBCategory}"/>
+        <ComboBox Name="CBCategory" IsEditable="False" HorizontalAlignment="Left" Margin="119,134,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem>Drinks</ComboBoxItem>
+            <ComboBoxItem>Spices</ComboBoxItem>
+            <ComboBoxItem>Meat</ComboBoxItem>
+        </ComboBox>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="175,201,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
