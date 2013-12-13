@@ -6,9 +6,34 @@ namespace ProductsManager.Tests
     [TestClass]
     public class ProductsCRUDOperationsTests
     {
-        [TestMethod]
-        public void TestMethod1()
+        [TestMethod, Ignore]
+        public void CreateNewProduct()
         {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod, Ignore]
+        public void GetProductsFromDb()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod, Ignore]
+        public void UpdateProduct()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod, Ignore]
+        public void DeleteProduct()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod, Ignore]
+        public void DeleteMultipleProducts()
+        {
+            throw new NotImplementedException();
         }
     }
 }

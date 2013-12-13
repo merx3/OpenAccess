@@ -6,9 +6,40 @@ namespace ProductsManager.Tests
     [TestClass]
     public class DataBindingTests
     {
-        [TestMethod]
-        public void TestMethod1()
+        [TestMethod, Ignore]
+        public void CanGetAllProducts()
         {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod, Ignore]
+        public void CanFilterProductsByCategory()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod, Ignore]
+        public void CanSortProductsByName()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod, Ignore]
+        public void CanSortProductsByCategory()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod, Ignore]
+        public void CanSortProductsByPrice()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod, Ignore]
+        public void CanRefreshProducts()
+        {
+            throw new NotImplementedException();
         }
     }
 }
