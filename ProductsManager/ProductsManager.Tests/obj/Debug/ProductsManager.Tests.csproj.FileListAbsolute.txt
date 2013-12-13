@@ -1,0 +1,4 @@
+C:\Dev\MyGithub\OpenAccess\ProductsManager\ProductsManager.Tests\bin\Debug\ProductsManager.Tests.dll
+C:\Dev\MyGithub\OpenAccess\ProductsManager\ProductsManager.Tests\bin\Debug\ProductsManager.Tests.pdb
+C:\Dev\MyGithub\OpenAccess\ProductsManager\ProductsManager.Tests\obj\Debug\ProductsManager.Tests.dll
+C:\Dev\MyGithub\OpenAccess\ProductsManager\ProductsManager.Tests\obj\Debug\ProductsManager.Tests.pdb
