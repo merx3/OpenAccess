@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="ProductsManagerModel" namespace="ProductsManager.Model" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="ProductsManagerModel" backend="mssql" default-schema="dbo" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="ProductsManager.Model" default="true">
+      <orm:class name="Product" uniqueId="a456baa8-acc8-4806-b507-64aebdcf18b1">
+        <orm:table name="Products" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="ba1e75ee-a403-465a-b168-7b81c20e5aca" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="2f51d438-e2c0-4252-acda-8b02e76583ad" type="System.String">
+          <orm:column name="Name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_price" property="Price" behavior="readwrite" uniqueId="ec9507a9-7de3-43b7-a930-6789fae286a7" type="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Price" sql-type="decimal" nullable="true" length="12" scale="2" ado-type="Decimal" />
+        </orm:field>
+        <orm:field name="_isAvailable" property="IsAvailable" behavior="readwrite" uniqueId="dceca5df-4ccd-4975-9bb7-3de1f4c342ab" type="System.Boolean">
+          <orm:column name="IsAvailable" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_categoryId" property="CategoryId" behavior="readwrite" uniqueId="8b9fe917-cb1f-4bdd-8ac0-3f19638dbdc3" type="System.Int32">
+          <orm:column name="CategoryId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_category" property="Category" behavior="readwrite" uniqueId="bdbbf864-7870-4a1c-aabe-54cbdce7d8ca" type="ProductsManager.Model.Category">
+          <orm:reference uniqueId="2e945a50-f829-4dfe-870a-019c2d725f4b" association-name="ProductHasCategory">
+            <orm:sharedfield name="_categoryId" target-class="ProductsManager.Model.Category" target-field="_id" />
+            <orm:constraint name="FK_Categories" delete-action="dbdefaultrule" destination-table="Categories" />
+          </orm:reference>
+        </orm:field>
+      </orm:class>
+      <orm:class name="Category" uniqueId="97973536-ada0-4cd1-8bf7-c3b1eddfe2d5">
+        <orm:table name="Categories" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="a0e433c9-7062-480e-b897-9b967bb1bdef" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="8da8946c-c7ac-46f6-929d-4e70236f3793" type="System.String">
+          <orm:column name="Name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_description" property="Description" behavior="readwrite" uniqueId="fb181fc1-806c-4ad1-a864-08a73087a6fe" type="System.String">
+          <orm:column name="Description" sql-type="nvarchar" nullable="false" length="500" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_products" property="Products" behavior="readwrite" uniqueId="8b483954-9e96-4df2-84da-72c2fa67e386" type="ProductsManager.Model.Product">
+          <orm:collection element-class="ProductsManager.Model.Product" inverse-field="_category" order-by="" uniqueId="2e945a50-f829-4dfe-870a-019c2d725f4b" />
+        </orm:field>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="Products">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="Price" sql-type="decimal" nullable="true" length="12" scale="2" ado-type="Decimal" />
+        <orm:column name="IsAvailable" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:column name="CategoryId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:constraint name="FK_Categories" delete-action="dbdefaultrule" destination-table="Categories">
+          <orm:column name="CategoryId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="Categories">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="Description" sql-type="nvarchar" nullable="false" length="500" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:source-strategy>Property</orm:source-strategy>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <AppConfigConnectionPropertyName>ProductsManagerConnection</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=ProductsManager;Integrated Security=True</AppConfigConnectionString>
+    <InitialCatalog>ProductsManager</InitialCatalog>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <PluralizationMode>Singularize</PluralizationMode>
+      </ClassRules>
+      <FieldRules>
+        <AddPrefix>_</AddPrefix>
+        <CaseMode>CamelCase</CaseMode>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>PascalCase</CaseMode>
+      </PropertyRules>
+      <NavigationPropertyRules />
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <MappingDefinitionType>Xml</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings />
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>MsSql</Backend>
+        <ProviderName>System.Data.SqlClient</ProviderName>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="a456baa8-acc8-4806-b507-64aebdcf18b1" name="Product" namespace="ProductsManager.Model" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="ba1e75ee-a403-465a-b168-7b81c20e5aca" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="8b9fe917-cb1f-4bdd-8ac0-3f19638dbdc3" name="CategoryId" type="Int32" label="CategoryId : Int32" kind="Persistent" fieldName="_categoryId" />
+      <Property Id="dceca5df-4ccd-4975-9bb7-3de1f4c342ab" name="IsAvailable" type="Boolean" label="IsAvailable : Boolean" kind="Persistent" fieldName="_isAvailable" />
+      <Property Id="2f51d438-e2c0-4252-acda-8b02e76583ad" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
+      <Property Id="ec9507a9-7de3-43b7-a930-6789fae286a7" name="Price" type="Decimal" label="Price : Decimal" nullable="true" kind="Persistent" fieldName="_price" />
+      <AssociationTargets>
+        <Association Id="2e945a50-f829-4dfe-870a-019c2d725f4b" SourceMultiplicity="One" name="ProductHasCategory">
+          <DomainClassMoniker name="/ProductsManagerModel/Category" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="6a526667-f56d-4d5e-80de-957f039b7410">
+              <NavigationalPropertyMoniker name="/ProductsManagerModel/Category/Products" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="f0ca923f-9cd6-4bf6-af8a-d69d9f7bc084">
+              <NavigationalPropertyMoniker name="/ProductsManagerModel/Product/Category" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="8a54299a-12cd-4ae9-8497-c0c94dd14b1d">
+          <NavigationalProperty Id="bdbbf864-7870-4a1c-aabe-54cbdce7d8ca" name="Category" type="Category" label="Category : Category" nullable="true" kind="Persistent" fieldName="_category" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="97973536-ada0-4cd1-8bf7-c3b1eddfe2d5" name="Category" namespace="ProductsManager.Model" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="a0e433c9-7062-480e-b897-9b967bb1bdef" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="fb181fc1-806c-4ad1-a864-08a73087a6fe" name="Description" label="Description : String" kind="Persistent" fieldName="_description" />
+      <Property Id="8da8946c-c7ac-46f6-929d-4e70236f3793" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="f9567163-a292-40b7-942b-265a595fd682">
+          <NavigationalProperty Id="8b483954-9e96-4df2-84da-72c2fa67e386" name="Products" type="IList&lt;Product&gt;" label="Products : IList&lt;Product&gt;" nullable="true" kind="Persistent" fieldName="_products" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="1ef2b872-991c-49da-90d2-e388b41ac43a">
+      <domainContainer name="ProductsManagerModel" namespace="ProductsManager.Model" showPropertiesCompartment="true">
+        <entitySetProperty name="Products" namespace="ProductsManager.Model" type="Product" label="Products : IQueryable&lt;ProductsManager.Model.Product&gt;" />
+        <entitySetProperty name="Categories" namespace="ProductsManager.Model" type="Category" label="Categories : IQueryable&lt;ProductsManager.Model.Category&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>

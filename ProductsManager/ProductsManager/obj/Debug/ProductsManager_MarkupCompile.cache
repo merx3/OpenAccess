@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Dev\MyGithub\OpenAccess\ProductsManager\ProductsManager\obj\Debug\
-ProductsManager
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\obj\Debug\
+ProductsManager.WPF
 none
 false
 DEBUG;TRACE
-C:\Dev\MyGithub\OpenAccess\ProductsManager\ProductsManager\App.xaml
+C:\Dev\OpenAccess\ProductsManager\ProductsManager\App.xaml
 2-1651801809
 
-61953254732
-12-1401562060
+10-658793164
+171983345577
 View\MainWindow.xaml;View\ProductModify.xaml;
 
 False

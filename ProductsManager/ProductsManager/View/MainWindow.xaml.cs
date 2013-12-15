@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductsManager.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProductsManager
+namespace ProductsManager.WPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IMainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+
+        public void ApplyCategoriesFiltes(object sender, RoutedEventArgs e)
+        {
+            ((ProductsViewModel<IMainWindow>)this.DataContext).GetProductsAndCategories();
+        }
+
+        private void DeleteSelectedProducts(object sender, RoutedEventArgs e)
+        {
+            ((ProductsViewModel<IMainWindow>)this.DataContext).DeleteProducts();
         }
     }
 }
