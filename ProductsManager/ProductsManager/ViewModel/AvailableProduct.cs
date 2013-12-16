@@ -9,11 +9,11 @@ namespace ProductsManager.WPF.ViewModel
     public class AvailableProduct
     {
         public int Id { get; private set; }
-        public string Name { get; private set; }
-        public Category Category { get; private set; }
+        public string Name { get; set; }
+        public Category Category { get; set; }
         public int CategoryId { get; private set; }
-        public decimal? Price { get; private set; }
-        public bool IsAvailable { get; private set; }
+        public decimal? Price { get; set; }
+        public bool IsAvailable { get; set; }
         public bool ToDelete { get; set; }
 
         public AvailableProduct(Model.Product x)

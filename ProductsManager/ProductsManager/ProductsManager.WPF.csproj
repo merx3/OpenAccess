@@ -71,6 +71,10 @@
     </Compile>
     <Compile Include="ViewModel\AvailableProduct.cs" />
     <Compile Include="ViewModel\CategorySelection.cs" />
+    <Compile Include="ViewModel\Converters\BoolToIndexConverter.cs" />
+    <Compile Include="ViewModel\Converters\CategoryToTextConverter.cs" />
+    <Compile Include="ViewModel\Converters\DecimalToTextConverter.cs" />
+    <Compile Include="ViewModel\ProductsDataHolder.cs" />
     <Compile Include="ViewModel\Interfaces\IMainWindow.cs" />
     <Compile Include="ViewModel\ProductsViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">

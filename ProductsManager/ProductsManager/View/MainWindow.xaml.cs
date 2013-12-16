@@ -1,4 +1,5 @@
-﻿using ProductsManager.WPF.ViewModel;
+﻿using ProductsManager.Model;
+using ProductsManager.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,17 +30,30 @@ namespace ProductsManager.WPF
 
         public void ApplyCategoriesFiltes(object sender, RoutedEventArgs e)
         {
-            ((ProductsViewModel<IMainWindow>)this.DataContext).GetProductsAndCategories();
+            ((ProductsDataHolder)this.DataContext).GetProductsAndCategories();
         }
 
         private void DeleteSelectedProducts(object sender, RoutedEventArgs e)
         {
-            ((ProductsViewModel<IMainWindow>)this.DataContext).DeleteProducts();
+            ((ProductsDataHolder)this.DataContext).DeleteProducts();
         }
 
         private void OpenCreateWindow(object sender, RoutedEventArgs e)
         {
             ProductModify productEditWindow = new ProductModify();
+            
+            productEditWindow.DataContext = this.DataContext;
+            Product createdProduct = new Product()
+            {
+                Id = -1,
+                Name = "",
+                CategoryId = -1,
+                Category = null,
+                IsAvailable = true,
+                Price = 0.0M
+            };
+            ((ProductsDataHolder)this.DataContext).ProductToModify = new AvailableProduct(createdProduct);
+
             productEditWindow.Title = "Create New Product";
             productEditWindow.Owner = this;
             productEditWindow.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;

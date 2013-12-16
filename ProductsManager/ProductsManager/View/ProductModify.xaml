@@ -1,8 +1,13 @@
 ﻿<Window x:Class="ProductsManager.WPF.ProductModify"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ProductsManager.WPF.ViewModel.Converters"
         Title="ProductModify" Height="300" Width="500">
 
+    <Window.Resources>
+        <local:BoolToIndexConverter x:Key="boolToIndexConverter" />
+    </Window.Resources>
+    
     <ScrollViewer
         VerticalScrollBarVisibility="Auto"
         HorizontalScrollBarVisibility="Auto">
@@ -30,12 +35,19 @@
         </Grid.RowDefinitions>
         
         <Label Grid.Row="0" Grid.Column="0"
-            Content="Product id: 1111" 
+            Content="Product id:" 
             HorizontalAlignment="Left" 
             Margin="5" 
             VerticalAlignment="Top"/>
 
-        <Label Grid.Row="1" Grid.Column="0"
+        <Label Grid.Row="0" Grid.Column="0"
+            Content="{Binding Path=ProductToModify.Id}" 
+            HorizontalAlignment="Left" 
+            Margin="70 5 0 0" 
+            Name="ProductIdLabel"
+            VerticalAlignment="Top"/>
+
+            <Label Grid.Row="1" Grid.Column="0"
             Content="_Name:" 
             HorizontalAlignment="Left" 
             Margin="5" 
@@ -48,10 +60,19 @@
             Height="23"
             Margin="5" 
             TextWrapping="Wrap" 
-            Text="" 
+            Text="{Binding Path=ProductToModify.Name, Mode=TwoWay}" 
             VerticalAlignment="Top"
             Width="120"/>
 
+        <Label Grid.Row="1" Grid.Column="2"
+            Name="LblNameError"
+            Content="Please enter a valid name" 
+            Foreground="Crimson"
+            HorizontalAlignment="Left" 
+            Margin="5" 
+            Visibility="Hidden"
+            VerticalAlignment="Top" />
+        
         <Label Grid.Row="2" Grid.Column="0"
             Content="_Price:"
             HorizontalAlignment="Left"
@@ -65,9 +86,18 @@
             Height="23"
             Margin="5" 
             TextWrapping="Wrap"
-            Text="" 
+            Text="{Binding Path=ProductToModify.Price, Mode=TwoWay}" 
             VerticalAlignment="Top" 
             Width="120"/>
+
+        <Label Grid.Row="2" Grid.Column="2"
+            Name="LblPriceError"
+            Content="Please enter a valid price" 
+            Foreground="Crimson"
+            HorizontalAlignment="Left" 
+            Margin="5" 
+            Visibility="Hidden"
+            VerticalAlignment="Top" />
 
         <Label Grid.Row="3" Grid.Column="0"
             Content="Is _available:" 
@@ -80,13 +110,12 @@
             Name="CBAvailable" 
             HorizontalAlignment="Left"
             Margin="5" 
+            SelectedValuePath="{Binding IsAvailable, Mode=TwoWay, Converter={StaticResource ResourceKey=boolToIndexConverter}}"
             VerticalAlignment="Top" 
             Width="120">
-            
-            <ComboBoxItem IsSelected="True">true</ComboBoxItem>
-            <ComboBoxItem>false</ComboBoxItem>
-            
-        </ComboBox>
+                <ComboBoxItem IsSelected="True">Yes</ComboBoxItem>
+                <ComboBoxItem>No</ComboBoxItem>
+            </ComboBox>
 
         <Label Grid.Row="4" Grid.Column="0"
             Content="Category:" 
@@ -100,20 +129,28 @@
             IsEditable="False"
             HorizontalAlignment="Left"
             Margin="5" 
+            ItemsSource="{Binding Path=AllCategories}"
+            SelectedItem="{Binding Path=ProductToModify.Category, Mode=TwoWay}"
+            DisplayMemberPath="Name"
             VerticalAlignment="Top" Width="120">
-            
-            <ComboBoxItem>Drinks</ComboBoxItem>
-            <ComboBoxItem>Spices</ComboBoxItem>            
-            <ComboBoxItem>Meat</ComboBoxItem>
-            
         </ComboBox>
 
+        <Label Grid.Row="4" Grid.Column="2"
+            Name="LblCategoryError"
+            Content="Please choose a category" 
+            Foreground="Crimson"
+            HorizontalAlignment="Left" 
+            Margin="5" 
+            Visibility="Hidden"
+            VerticalAlignment="Top" />
+        
         <Button Grid.Row="5" Grid.Column="2"
             Content="Save" 
             HorizontalAlignment="Left" 
             Margin="5" 
             VerticalAlignment="Top" 
-            Width="75"/>
+            Width="75"
+            Click="SaveProduct"/>
 
     </Grid>
     </ScrollViewer>

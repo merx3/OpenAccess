@@ -8,10 +8,6 @@ namespace ProductsManager.WPF.ViewModel
 {
     public class CategorySelection
     {
-        private int id;
-        private string name;
-        private string description;
-        private bool isSelected;
         public int Id { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
