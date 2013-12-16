@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductsManager.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,18 @@ namespace ProductsManager.WPF
     /// </summary>
     public partial class ProductModify : Window
     {
+        private Product product;
+
         public ProductModify()
         {
             InitializeComponent();
+            product = new Product();
+        }
+
+        public ProductModify(int ProductId)
+        {
+            InitializeComponent();
+            //this.
         }
     }
 }

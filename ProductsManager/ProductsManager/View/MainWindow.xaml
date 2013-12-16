@@ -139,7 +139,8 @@
                 Grid.Row="1"
                 Content="New Product" 
                 Margin="10" 
-                Width="100"/>
+                Width="100"
+                Click="OpenCreateWindow"/>
             
             <Button  
                 Grid.Column="1" 

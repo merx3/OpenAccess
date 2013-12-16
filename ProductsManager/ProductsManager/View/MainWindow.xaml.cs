@@ -36,5 +36,14 @@ namespace ProductsManager.WPF
         {
             ((ProductsViewModel<IMainWindow>)this.DataContext).DeleteProducts();
         }
+
+        private void OpenCreateWindow(object sender, RoutedEventArgs e)
+        {
+            ProductModify productEditWindow = new ProductModify();
+            productEditWindow.Title = "Create New Product";
+            productEditWindow.Owner = this;
+            productEditWindow.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            productEditWindow.ShowDialog();
+        }
     }
 }
