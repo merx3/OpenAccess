@@ -7,6 +7,10 @@ using ProductsManager.Model;
 using System.Windows.Controls;
 using System.Windows;
 using System.ComponentModel;
+using System.Reflection;
+using System.IO;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace ProductsManager.WPF.ViewModel
 {
@@ -22,6 +26,7 @@ namespace ProductsManager.WPF.ViewModel
             this.view = v;
             this.DataContext = this;
             v.DataContext = this.DataContext;
+            this.InitializeDatabase();
             this.GetProductsAndCategories();
         }
 
@@ -66,6 +71,84 @@ namespace ProductsManager.WPF.ViewModel
             }
             this.Context.SaveChanges();
             this.GetProductsAndCategories();
+        }
+
+        private void InitializeDatabase()
+        {
+            string script = null;
+            //var schemaHandler = this.Context.GetSchemaHandler();
+
+            //if (schemaHandler.DatabaseExists())
+            //{
+            //    // not working
+            //    script = schemaHandler.CreateUpdateDDLScript(null);
+            //}
+            //else
+            //{
+            //    var assembly = Assembly.GetExecutingAssembly();
+            //    var resourceName = "ProductsManager.WPF.script.MyProjectDb.sql";
+
+            //    using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            //    {
+            //        using (StreamReader reader = new StreamReader(stream))
+            //        {
+            //            script = reader.ReadToEnd();
+            //        }
+            //    }
+            
+            //    // this too...
+            //    //schemaHandler.CreateDatabase();
+            //    //script = schemaHandler.CreateDDLScript(); 
+            //}
+
+            //if (!string.IsNullOrEmpty(script))
+            //{
+            //    schemaHandler.ExecuteDDLScript(script);
+            //}
+
+            var schemaHandler = this.Context.GetSchemaHandler();
+
+            if (!schemaHandler.DatabaseExists())
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                var resourceName = "ProductsManager.WPF.script.MyProjectDb.sql";
+
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        script = reader.ReadToEnd();
+                    }
+                };
+
+                string connectionString = ConfigurationManager.ConnectionStrings["master"].ConnectionString;
+                using (SqlConnection connection = new SqlConnection(
+                           connectionString))
+                {
+                    connection.Open();
+                    ExecuteScript(connection, script);
+                }
+            }
+        }
+
+        protected virtual void ExecuteScript(SqlConnection connection, string script)
+        {
+            string[] commandTextArray = System.Text.RegularExpressions.Regex.Split(script, "\r\n[\t ]*GO");
+
+            SqlCommand _cmd = new SqlCommand(String.Empty, connection);
+
+            foreach (string commandText in commandTextArray)
+            {
+                if (commandText.Trim() == string.Empty) continue;
+                if ((commandText.Length >= 3) && (commandText.Substring(0, 3).ToUpper() == "USE"))
+                {
+                    throw new Exception("Create-script contains USE-statement. Please provide non-database specific create-scripts!");
+                }
+
+                _cmd.CommandText = commandText;
+                _cmd.ExecuteNonQuery();
+            }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -59,6 +59,16 @@
     <Folder Include="Mocks\" />
     <Folder Include="TestData\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProductsManager.Model\ProductsManager.Model.csproj">
+      <Project>{c50145e6-a244-4f1f-b41f-90d1925b4a00}</Project>
+      <Name>ProductsManager.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProductsManager\ProductsManager.WPF.csproj">
+      <Project>{bc042479-e216-416c-b8c4-c77fc10f9185}</Project>
+      <Name>ProductsManager.WPF</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -1,5 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ProductsManager.WPF;
+using System.Linq;
+using ProductsManager.WPF.ViewModel;
+
 
 namespace ProductsManager.Tests
 {
@@ -9,7 +13,10 @@ namespace ProductsManager.Tests
         [TestMethod, Ignore]
         public void CanGetAllProducts()
         {
-            throw new NotImplementedException();
+            ProductsViewModel<IMainWindow> mainViewModel = new ProductsViewModel<IMainWindow>(new MainWindow());
+            Assert.AreEqual(mainViewModel.DisplayedProducts.Count, 10);
+            Assert.AreEqual(mainViewModel.DisplayedProducts.Where(x => x.Name == "Salt").ToList().Count, 1);
+            Assert.AreEqual(mainViewModel.ProductsCategories.Count, 4);
         }
 
         [TestMethod, Ignore]

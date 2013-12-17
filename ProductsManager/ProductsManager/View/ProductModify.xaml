@@ -152,6 +152,13 @@
             Width="75"
             Click="SaveProduct"/>
 
-    </Grid>
+        <Button Grid.Row="5" Grid.Column="2"
+            Content="Cancel" 
+            HorizontalAlignment="Left" 
+            Margin="100 5 0 0" 
+            VerticalAlignment="Top" 
+            Width="75"
+            Click="Cancel"/>
+        </Grid>
     </ScrollViewer>
 </Window>

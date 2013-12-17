@@ -20,16 +20,9 @@ namespace ProductsManager.WPF
     /// <summary>
     /// Interaction logic for ProductModify.xaml
     /// </summary>
-    public partial class ProductModify : Window, INotifyPropertyChanged
+    public partial class ProductModify : Window
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public ProductModify()
-        {
-            InitializeComponent();
-        }
-
-        public ProductModify(int ProductId)
         {
             InitializeComponent();
         }
@@ -37,30 +30,39 @@ namespace ProductsManager.WPF
         private void SaveProduct(object sender, RoutedEventArgs e)
         {
             string name = ((TextBox)FindName("TBName")).Text;
-            string priceText = ((TextBox)FindName("TBName")).Text;
-            decimal price;
             AvailableProduct p = ((ProductsDataHolder)this.DataContext).ProductToModify;
             
             ResetErrorMessages();
             if (!String.IsNullOrEmpty(name) && p.Price > 0.0M && p.Category != null)
             {
-                Product productToAdd = new Product()
-                {
-                    Name = p.Name,
-                    Price = p.Price,
-                    CategoryId = p.Category.Id,
-                    Category = p.Category,
-                    IsAvailable = p.IsAvailable,
-                };
-
                 ProductsManagerModel context = ((ProductsDataHolder)this.DataContext).Context;
+
+                if (p.Id == -1)
                 {
+                    Product productToAdd = new Product()
+                    {
+                        Name = p.Name,
+                        Price = p.Price,
+                        CategoryId = p.Category.Id,
+                        Category = p.Category,
+                        IsAvailable = p.IsAvailable,
+                    };
+
                     context.Add(productToAdd);
-                    context.SaveChanges();
-                    PropertyChanged(this.Parent, new PropertyChangedEventArgs("DisplayedProducts"));
-                    this.DialogResult = true;
-                    this.Close();
                 }
+                else
+                {
+                    Product productToUpdate = context.Products.Where(x => x.Id == p.Id).FirstOrDefault();
+                    productToUpdate.Name = p.Name;
+                    productToUpdate.Category = p.Category;
+                    productToUpdate.CategoryId = p.CategoryId;
+                    productToUpdate.Price = p.Price;
+                    productToUpdate.IsAvailable = p.IsAvailable;
+                }
+                
+                context.SaveChanges();
+                this.DialogResult = true;
+                this.Close();
             }
             else
             {
@@ -92,6 +94,12 @@ namespace ProductsManager.WPF
 
             object categoryErrorLbl = this.FindName("LblCategoryError");
             ((Label)categoryErrorLbl).Visibility = Visibility.Hidden;
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
         }
     }
 }

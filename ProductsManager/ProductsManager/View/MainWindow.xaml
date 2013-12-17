@@ -5,6 +5,28 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
         Title="Products Manager" Height="550" Width="800">
+
+
+    <!--<Window.Triggers>
+        <EventTrigger RoutedEvent="Image.MouseEnter"
+                SourceName="RefreshButtonImage">
+
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+            Storyboard.TargetName="RefreshButtonImage"
+            Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"
+            From="0"
+            To="360"
+            Duration="0:0:0.5"
+            RepeatBehavior="4x" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Window.Triggers>-->
+    
     <Window.Resources>
         
         <!-- Testing purpose only -->
@@ -76,7 +98,7 @@
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Edit"></Button>
+                                    <Button Click="EditProduct"  Content="Edit" Tag="{Binding Path=Id}"></Button>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -126,11 +148,29 @@
                 Grid.Row="1"
                 Margin="20 10" 
                 HorizontalAlignment="Left" 
-                Width="30"
-                Height="30"
+                Width="40"
+                Height="40"
                 Click="ApplyCategoriesFiltes">
-                
-                <Image Source="/Resources/imgs/refresh.png"></Image>
+
+                <Image Source="/Resources/imgs/refresh.png" Name="RefreshButtonImage" RenderTransformOrigin=".5,.5">
+                    <Image.RenderTransform>
+                        <RotateTransform x:Name="AnimatedRotateTransform" Angle="0" />
+                    </Image.RenderTransform>
+                    <Image.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="AnimatedRotateTransform" 
+                                                 Storyboard.TargetProperty="Angle" 
+                                                 By="10"        
+                                                 To="360" 
+                                                 Duration="0:0:0.5" 
+                                                 FillBehavior="Stop" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Image.Triggers>
+                </Image>
                 
             </Button>
             
@@ -142,7 +182,7 @@
                 Width="100"
                 Click="OpenCreateWindow"/>
             
-            <Button  
+            <Button
                 Grid.Column="1" 
                 Grid.Row="2"
                 Margin="10" 

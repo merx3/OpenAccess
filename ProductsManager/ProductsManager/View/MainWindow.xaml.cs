@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -26,7 +27,6 @@ namespace ProductsManager.WPF
         {
             InitializeComponent();
         }
-
 
         public void ApplyCategoriesFiltes(object sender, RoutedEventArgs e)
         {
@@ -57,7 +57,32 @@ namespace ProductsManager.WPF
             productEditWindow.Title = "Create New Product";
             productEditWindow.Owner = this;
             productEditWindow.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
-            productEditWindow.ShowDialog();
+            bool? newProductCreated = productEditWindow.ShowDialog();
+            if (newProductCreated.GetValueOrDefault(false) == true)
+            {
+                ((ProductsViewModel<IMainWindow>)this.DataContext).GetProductsAndCategories();
+            }
+        }
+
+        private void EditProduct(object sender, RoutedEventArgs e)
+        {
+            ProductModify productEditWindow = new ProductModify();
+            productEditWindow.DataContext = this.DataContext;
+
+            string productId = ((Button)sender).Tag.ToString();
+            var dataContext = ((ProductsDataHolder)this.DataContext);
+            var product = dataContext.Context.Products.Where(x => x.Id.ToString() == productId).FirstOrDefault();
+            dataContext.ProductToModify = new AvailableProduct(product);
+
+            productEditWindow.Title = "Edit Product: " + product.Name;
+            productEditWindow.Owner = this;
+            productEditWindow.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            bool? newProductCreated = productEditWindow.ShowDialog();
+            if (newProductCreated.GetValueOrDefault(false) == true)
+            {
+                ((ProductsViewModel<IMainWindow>)this.DataContext).GetProductsAndCategories();
+            }
+
         }
     }
 }
